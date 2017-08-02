@@ -26,6 +26,6 @@ TESTSERVER = 2
 ## Note
 Your sudo pass might be asked to enable the hostmanager plugin to update your hosts file.
 ## Note 2
-This has only been tested on Mac OSX
+The password is always "vagrant" for both the vagrant user as for the root account!
 ## Note 3
-The password is always "vagrant", for both the vagrant user as for the root account!
+This has only been tested on Mac OSX, but it should work on any Vagrant capable system.
