@@ -11,7 +11,14 @@ git clone https://github.com/scorputty/vagrant-testservers.git
 cd vagrant-testservers
 vagrant up
 ```
-This will install two testserver nodes, testserver1 and testserver2. You can login to them with vagrant ssh or ssh vagrant@testserverX (pass = vagrant).
+This will install two testserver nodes, testserver1 and testserver2. You can login to them with:
+```sh
+vagrant ssh testserverX
+```
+or
+```
+(pass = vagrant)
+```
 If you want more or less nodes to play with you need to edit this field in the Vagrantfile:
 ```ruby
 TESTSERVER = 2
@@ -20,3 +27,5 @@ TESTSERVER = 2
 Your sudo pass might be asked to enable the hostmanager plugin to update your hosts file.
 ## Note 2
 This has only been tested on Mac OSX
+## Note 3
+The password is always "vagrant", for both the vagrant user as for the root account!
