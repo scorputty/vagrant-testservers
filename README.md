@@ -15,9 +15,9 @@ This will install two testserver nodes, testserver1 and testserver2. You can log
 ```sh
 vagrant ssh testserverX
 ```
-or
+or use regular ssh to login
 ```
-(pass = vagrant)
+ssh vagrant@testserverX (pass = vagrant)
 ```
 If you want more or less nodes to play with you need to edit this field in the Vagrantfile:
 ```ruby
