@@ -1,0 +1,4 @@
+---
+# Install latest version of goss to /usr/local/bin
+- name: Install goss
+  shell: "curl -fsSL https://goss.rocks/install | sh"
