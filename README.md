@@ -29,3 +29,8 @@ Your sudo pass might be asked to enable the hostmanager plugin to update your ho
 The password is always "vagrant" for both the vagrant user as for the root account!
 ## Note 3
 This has only been tested on Mac OSX, but it should work on any Vagrant capable system.
+## Note 4
+Adjust the network range in the Vagrantfile to suit your specific needs.
+```ruby
+node.vm.network :private_network, ip: "192.168.0.%d" % (10 + i )
+```
