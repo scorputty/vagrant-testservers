@@ -6,7 +6,7 @@
 
 # This defines how many testservers Vagrant has to build
 TESTSERVER = 1
-
+TESTDISKS = 4
 
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
@@ -33,10 +33,15 @@ Vagrant.configure("2") do |config|
       node.vm.network :private_network, ip: "192.168.0.%d" % (10 + i )
       node.vm.provider "virtualbox" do |vb|
         vb.memory = "512"
-        unless File.exists?("2nd-disk-testserver#{i}.vdi")
-          vb.customize ["createhd",  "--filename", "2nd-disk-testserver#{i}", "--size", "20480"] # 20Gb
+        (1..TESTDISKS).each do |d|
+          unless File.exists?("Disk-#{d}-testserver#{i}.vdi")
+            vb.customize ["createhd",  "--filename", "Disk-#{d}-testserver#{i}", "--size", "20480"] # 20Gb
+          end
         end
-        vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", "1", "--device", "1", "--type", "hdd", "--medium", "2nd-disk-testserver#{i}.vdi"]
+        vb.customize ['storagectl', :id, '--name', 'SATA Controller', '--add', 'sata', '--portcount', "#{TESTDISKS}"]
+        (1..TESTDISKS).each do |d|
+          vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "#{d}", "--device", 0, "--type", "hdd", "--medium", "Disk-#{d}-testserver#{i}.vdi"]
+        end
       end
       # Use this block for Ansible provisioning
       if i == TESTSERVER
@@ -51,9 +56,6 @@ Vagrant.configure("2") do |config|
           }
         end
       end
-
     end
   end
-
-
 end
